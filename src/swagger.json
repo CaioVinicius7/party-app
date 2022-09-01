@@ -1,0 +1,12 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Party App API",
+		"description": "Party App é um sistema de divulgação de festas privadas e eventos públicos, onde o usuário pode encontrar festas/eventos e ver informações sobre o mesmo ou pode divulgar sua própria festa/evento.",
+		"version": "1.0.0",
+		"contact": {
+			"email": "caio1525pereira@gmail.com"
+		}
+	},
+	"paths": {}
+}
