@@ -7,7 +7,7 @@
 	"scripts": {
 		"dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/shared/infra/http/server.ts",
 		"migrate:deploy": "npx prisma migrate deploy",
-		"docker:start": "docker-compose start && docker logs party_app -f",
+		"docker:start": "docker-compose start",
 		"docker:stop": "docker-compose stop",
 		"lint": "yarn eslint src --ext .ts",
 		"lint:fix": "yarn eslint src --ext .ts --fix"
