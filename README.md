@@ -13,6 +13,8 @@ Antes de começar, você vai precisar ter instalado em sua máquina:
 
 ## 🎲 Rodando a API
 
+Caso seja a primeira vez siga os seguintes passos:
+
 ```bash
 # crie o arquivo .env seguindo o arquivo de exemplo
 
@@ -23,7 +25,19 @@ $ docker-compose build
 $ docker-compose up -d
 
 # Rode as migrations
-$ yarn prisma migrate deploy
+$ yarn migrate:deploy
+
+# Rode o servidor
+$ yarn dev
+
+# O servidor ficara ativo na porta:3333 - acesse <http://localhost:3333>
+```
+
+Caso contrário siga esses passos:
+
+```bash
+# Inicialize os containers
+$ yarn docker:start
 
 # Rode o servidor
 $ yarn dev
