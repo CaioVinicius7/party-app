@@ -8,5 +8,104 @@
 			"email": "caio1525pereira@gmail.com"
 		}
 	},
-	"paths": {}
+	"paths": {
+		"/user": {
+			"post": {
+				"tags": ["Users"],
+				"summary": "Cadastro de usuário",
+				"description": "Cadastro de usuário",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/UserRegisterRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/UserRegisterResponse201"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "A user with this email already exists",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/UserRegisterResponse400"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"UserRegisterRequest": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"password": {
+					"type": "string",
+					"format": "password"
+				}
+			}
+		},
+		"UserRegisterResponse201": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid"
+				},
+				"name": {
+					"type": "string",
+					"example": "Caio"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"password": {
+					"type": "string",
+					"example": "$2a$10$I9fo.7l01Gln4cya9AuZV..Jtr6C7194YJlffd6a6z0Hnnti.wHl6"
+				},
+				"banner": {
+					"type": "null",
+					"example": "null"
+				},
+				"created_at": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"updated_at": {
+					"type": "string",
+					"format": "date-time"
+				}
+			}
+		},
+		"UserRegisterResponse400": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string",
+					"example": "A user with this email already exists"
+				}
+			}
+		}
+	}
 }
