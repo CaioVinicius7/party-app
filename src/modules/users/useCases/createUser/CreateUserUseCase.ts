@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 
+import { User } from "@prisma/client";
 import { AppError } from "@shared/errors/AppError";
 
 import { IUsersRepository } from "../../repositories/IUsersRepository";
@@ -18,7 +19,7 @@ class CreateUserUseCase {
 		private usersRepository: IUsersRepository
 	) {}
 
-	async execute({ name, email, password }: ICreateUser) {
+	async execute({ name, email, password }: ICreateUser): Promise<User> {
 		const userExists = await this.usersRepository.findByEmail(email);
 
 		if (userExists) {
