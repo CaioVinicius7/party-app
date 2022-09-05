@@ -1,7 +1,7 @@
 interface ICreatePartyDTO {
 	name: string;
-	banner: string;
-	price: string;
+	banner?: string;
+	price: number;
 	coordination: string;
 	description: string;
 	date: string;
