@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { ICreatePartyDTO } from "@modules/parties/dtos/ICreatePartyDTO";
 import { IPartiesRepository } from "@modules/parties/repositories/IPartiesRepository";
+import { Party } from "@prisma/client";
 import { AppError } from "@shared/errors/AppError";
 
 @injectable()
@@ -19,7 +20,7 @@ class CreatePartyUseCase {
 		description,
 		date,
 		userId
-	}: ICreatePartyDTO) {
+	}: ICreatePartyDTO): Promise<Party> {
 		const partyExists = await this.partiesRepository.findByName(name);
 
 		if (partyExists) {

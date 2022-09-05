@@ -4,7 +4,7 @@ import { container } from "tsyringe";
 import { CreatePartyUseCase } from "./CreatePartyUseCase";
 
 class CreatePartyController {
-	async handle(req: Request, res: Response) {
+	async handle(req: Request, res: Response): Promise<Response> {
 		const { id: userId } = req.user;
 		const { name, banner, price, coordination, description, date } = req.body;
 
