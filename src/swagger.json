@@ -46,6 +46,44 @@
 					}
 				}
 			}
+		},
+		"/user/authenticate": {
+			"post": {
+				"tags": ["Users"],
+				"summary": "Autenticação de usuário",
+				"description": "Autenticação de usuário",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/AuthenticateUserRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/AuthenticateUserResponse200"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Email or password incorrect.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/AuthenticateUserResponse400"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"definitions": {
@@ -104,6 +142,32 @@
 				"message": {
 					"type": "string",
 					"example": "A user with this email already exists"
+				}
+			}
+		},
+		"AuthenticateUserRequest": {
+			"type": "object",
+			"properties": {
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"password": {
+					"type": "string",
+					"format": "password"
+				}
+			}
+		},
+		"AuthenticateUserResponse200": {
+			"type": "string",
+			"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2FpbyIsImVtYWlsIjoiY2Fpb0BnbWFpbC5jb20iLCJpYXQiOjE2NjIzMzU0NjAsImV4cCI6MTY2MjQyMTg2MCwic3ViIjoiY2IzMWE3YjctODYxNS00MDBhLThlMzAtZDYyNzAzMTY4ODBhIn0.LFePqOhDx5_JtPdA5vkp9CmUmLFmjUttycr8xAq2ZZ8"
+		},
+		"AuthenticateUserResponse400": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string",
+					"example": "Email or password incorrect."
 				}
 			}
 		}
