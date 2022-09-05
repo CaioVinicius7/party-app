@@ -84,6 +84,49 @@
 					}
 				}
 			}
+		},
+		"/Party": {
+			"post": {
+				"tags": ["Parties"],
+				"summary": "Cadastro de festa",
+				"description": "Cadastro de festa",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/PartyRegisterRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/PartyRegisterResponse201"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "A party with this name already exists",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/PartyRegisterResponse400"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"definitions": {
@@ -169,6 +212,92 @@
 					"type": "string",
 					"example": "Email or password incorrect."
 				}
+			}
+		},
+		"PartyRegisterRequest": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"banner": {
+					"type": "string"
+				},
+				"price": {
+					"type": "number"
+				},
+				"coordination": {
+					"type": "string",
+					"example": "05/09/2022"
+				},
+				"description": {
+					"type": "string"
+				},
+				"date": {
+					"type": "string",
+					"example": "05/09/2022"
+				}
+			}
+		},
+		"PartyRegisterResponse201": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid"
+				},
+				"name": {
+					"type": "string"
+				},
+				"banner": {
+					"type": "string"
+				},
+				"price": {
+					"type": "number"
+				},
+				"coordination": {
+					"type": "string",
+					"example": "05/09/2022"
+				},
+				"description": {
+					"type": "string"
+				},
+				"date": {
+					"type": "string",
+					"example": "05/09/2022"
+				},
+				"status": {
+					"type": "boolean"
+				},
+				"draft": {
+					"type": "boolean"
+				},
+				"created_at": {
+					"type": "date",
+					"format": "date-time"
+				},
+				"updated_at": {
+					"type": "date",
+					"format": "date-time"
+				}
+			}
+		},
+		"PartyRegisterResponse400": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string",
+					"example": "A party with this name already exists"
+				}
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
 			}
 		}
 	}
