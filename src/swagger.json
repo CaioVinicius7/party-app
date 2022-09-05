@@ -35,7 +35,7 @@
 						}
 					},
 					"400": {
-						"description": "A user with this email already exists",
+						"description": "A user with this email already exists or A user with this phone already exists",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -140,6 +140,10 @@
 					"type": "string",
 					"format": "email"
 				},
+				"phone": {
+					"type": "string",
+					"example": "(35) 94002-8922"
+				},
 				"password": {
 					"type": "string",
 					"format": "password"
@@ -160,6 +164,10 @@
 				"email": {
 					"type": "string",
 					"format": "email"
+				},
+				"phone": {
+					"type": "string",
+					"example": "(35) 94002-8922"
 				},
 				"password": {
 					"type": "string",
@@ -184,7 +192,7 @@
 			"properties": {
 				"message": {
 					"type": "string",
-					"example": "A user with this email already exists"
+					"example": "A user with this email/phone already exists"
 				}
 			}
 		},
