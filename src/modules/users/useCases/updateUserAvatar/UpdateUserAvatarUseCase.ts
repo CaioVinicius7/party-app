@@ -29,7 +29,8 @@ class UpdateUserAvatarUseCase {
 		const user = await this.usersRepository.findById(userId);
 
 		if (user?.banner) {
-			throw new AppError("Delete not complete");
+			const currentAvatarImage = user.banner.split("/").at(-1);
+			await this.storageProvider.delete(currentAvatarImage!, "avatar");
 		}
 
 		await this.storageProvider.save(avatarFile, "avatar");
