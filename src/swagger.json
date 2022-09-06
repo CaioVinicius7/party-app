@@ -86,6 +86,23 @@
 			}
 		},
 		"/Party": {
+			"get": {
+				"tags": ["Parties"],
+				"summary": "Listagem de festas disponíveis",
+				"description": "Listagem de festas disponíveis",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/ListAvailablePartiesResponse200"
+								}
+							}
+						}
+					}
+				}
+			},
 			"post": {
 				"tags": ["Parties"],
 				"summary": "Cadastro de festa",
@@ -264,8 +281,7 @@
 					"type": "number"
 				},
 				"coordination": {
-					"type": "string",
-					"example": "05/09/2022"
+					"type": "string"
 				},
 				"description": {
 					"type": "string"
@@ -296,6 +312,52 @@
 				"message": {
 					"type": "string",
 					"example": "A party with this name already exists"
+				}
+			}
+		},
+		"ListAvailablePartiesResponse200": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"name": {
+						"type": "string"
+					},
+					"banner": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number"
+					},
+					"coordination": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"date": {
+						"type": "string",
+						"example": "05/09/2022"
+					},
+					"status": {
+						"type": "boolean"
+					},
+					"draft": {
+						"type": "boolean",
+						"example": false
+					},
+					"created_at": {
+						"type": "date",
+						"format": "date-time"
+					},
+					"updated_at": {
+						"type": "date",
+						"format": "date-time"
+					}
 				}
 			}
 		}
