@@ -85,6 +85,48 @@
 				}
 			}
 		},
+		"/user/avatar": {
+			"patch": {
+				"tags": ["Users"],
+				"summary": "Upload de imagem de perfil do usuário",
+				"description": "Upload de imagem de perfil do usuário",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"avatar": {
+										"type": "string",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"204": {
+						"description": "Success"
+					},
+					"400": {
+						"description": "Avatar image is undefined or Invalid file type",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/UpdateUserAvatarResponse400"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/Party": {
 			"get": {
 				"tags": ["Parties"],
@@ -358,6 +400,15 @@
 						"type": "date",
 						"format": "date-time"
 					}
+				}
+			}
+		},
+		"UpdateUserAvatarResponse400": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string",
+					"example": "Avatar image is undefined"
 				}
 			}
 		}
