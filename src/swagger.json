@@ -10,6 +10,28 @@
 	},
 	"paths": {
 		"/user": {
+			"get": {
+				"tags": ["Users"],
+				"summary": "Listagem dos dados do usuário",
+				"description": "Listagem dos dados do usuário",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/UserProfileResponse200"
+								}
+							}
+						}
+					}
+				}
+			},
 			"post": {
 				"tags": ["Users"],
 				"summary": "Cadastro de usuário",
@@ -78,6 +100,48 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/definitions/AuthenticateUserResponse400"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/avatar": {
+			"patch": {
+				"tags": ["Users"],
+				"summary": "Upload de imagem de perfil do usuário",
+				"description": "Upload de imagem de perfil do usuário",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"avatar": {
+										"type": "string",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"204": {
+						"description": "Success"
+					},
+					"400": {
+						"description": "Avatar image is undefined or Invalid file type",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/UpdateUserAvatarResponse400"
 								}
 							}
 						}
@@ -236,6 +300,52 @@
 				"message": {
 					"type": "string",
 					"example": "Email or password incorrect."
+				}
+			}
+		},
+		"UserProfileResponse200": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid"
+				},
+				"name": {
+					"type": "string",
+					"example": "Caio"
+				},
+				"email": {
+					"type": "string",
+					"format": "email"
+				},
+				"phone": {
+					"type": "string",
+					"example": "(35) 94002-8922"
+				},
+				"password": {
+					"type": "string",
+					"example": "$2a$10$I9fo.7l01Gln4cya9AuZV..Jtr6C7194YJlffd6a6z0Hnnti.wHl6"
+				},
+				"banner": {
+					"type": "string",
+					"example": "https://bucket-s3.s3.sa-east-1.amazonaws.com/avatar/3c45ff63aef53890961e4e1c50a7f041-profile-image.png"
+				},
+				"created_at": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"updated_at": {
+					"type": "string",
+					"format": "date-time"
+				}
+			}
+		},
+		"UpdateUserAvatarResponse400": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string",
+					"example": "Avatar image is undefined"
 				}
 			}
 		},

@@ -5,6 +5,16 @@ import { User } from "@prisma/client";
 import { IUsersRepository } from "../../../repositories/IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
+	async findById(id: string): Promise<User | null> {
+		const user = await prisma.user.findUnique({
+			where: {
+				id
+			}
+		});
+
+		return user;
+	}
+
 	async findByEmail(email: string): Promise<User | null> {
 		const user = await prisma.user.findUnique({
 			where: {
@@ -41,6 +51,17 @@ class UsersRepository implements IUsersRepository {
 		});
 
 		return user;
+	}
+
+	async alterAvatarImageUrl(id: string, avatarUrl: string): Promise<void> {
+		await prisma.user.update({
+			where: {
+				id
+			},
+			data: {
+				banner: avatarUrl
+			}
+		});
 	}
 }
 

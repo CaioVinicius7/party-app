@@ -4,3 +4,6 @@ yarn-error.log
 package-lock.json
 
 node_modules
+
+tmp/*
+!tmp/.gitkeep
