@@ -3,7 +3,7 @@ import { Router } from "express";
 import { CreatePartyController } from "@modules/parties/useCases/createParty/CreatePartyController";
 import { ListAvailablePartiesController } from "@modules/parties/useCases/listAvailableParties/ListAvailablePartiesController";
 
-import { ensureAuthenticateClient } from "../middlewares/ensureAuthenticateClient";
+import { ensureAuthenticateUser } from "../middlewares/ensureAuthenticateUser";
 
 const partiesRoutes = Router();
 
@@ -14,7 +14,7 @@ partiesRoutes.get("/", listAvailablePartiesController.handle);
 
 partiesRoutes.post(
 	"/",
-	ensureAuthenticateClient,
+	ensureAuthenticateUser,
 	createPartyUserController.handle
 );
 
