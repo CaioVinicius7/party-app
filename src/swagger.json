@@ -240,7 +240,7 @@
 						}
 					},
 					"400": {
-						"description": "Party with this id does not exist!",
+						"description": "Party with this id does not exist! or Presence already confirmed for this party!",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -526,6 +526,10 @@
 		"PartyConfirmationResponse201": {
 			"type": "object",
 			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid"
+				},
 				"userId": {
 					"type": "string",
 					"format": "uuid"
