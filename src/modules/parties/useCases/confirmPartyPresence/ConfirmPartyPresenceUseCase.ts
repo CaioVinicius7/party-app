@@ -19,6 +19,16 @@ class ConfirmPartyPresenceUseCase {
 			throw new AppError("Party with this id does not exist!");
 		}
 
+		const presenceAlreadyConfirmed =
+			await this.partyConfirmationRepository.findByUserAndPartyId(
+				userId,
+				partyId
+			);
+
+		if (presenceAlreadyConfirmed) {
+			throw new AppError("Presence already confirmed for this party!");
+		}
+
 		const partyConfirmation = await this.partyConfirmationRepository.create(
 			userId,
 			partyId
