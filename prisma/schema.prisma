@@ -11,33 +11,51 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
+  id         String   @id @default(uuid())
   name       String
-  email      String    @unique
-  phone      String    @unique
+  email      String   @unique
+  phone      String   @unique
   password   String
   banner     String?
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
-  Party      Party[]
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  Party             Party[]
+  partyConfirmation PartyConfirmation[]
 
   @@map("users")
 }
 
 model Party {
-  id           String    @id @default(uuid())
+  id           String   @id @default(uuid())
   name         String
   banner       String?
   price        Float
   coordination String
   description  String
   date         String
-  status       Boolean   @default(false)
-  draft        Boolean   @default(true)
-  created_at   DateTime? @default(now())
-  updated_at   DateTime? @default(now())
-  User         User      @relation(fields: [userId], references: [id])
-  userId       String
+  status       Boolean  @default(false)
+  draft        Boolean  @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now())
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  partyConfirmation PartyConfirmation[]
 
   @@map("parties")
+}
+
+model PartyConfirmation {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  Party   Party  @relation(fields: [partyId], references: [id])
+  partyId String
+
+  created_at DateTime @default(now())
+
+  @@id([userId, partyId])
+  @@map("party_confirmation")
 }
