@@ -4,6 +4,16 @@ import { IPartiesRepository } from "@modules/parties/repositories/IPartiesReposi
 import { Party } from "@prisma/client";
 
 class PartiesRepository implements IPartiesRepository {
+	async findById(id: string): Promise<Party | null> {
+		const party = await prisma.party.findUnique({
+			where: {
+				id
+			}
+		});
+
+		return party;
+	}
+
 	async findAllAvailable(): Promise<Party[]> {
 		const parties = await prisma.party.findMany({
 			where: {

@@ -10,7 +10,7 @@ interface IPayload {
 	email: string;
 }
 
-async function ensureAuthenticateClient(
+async function ensureAuthenticateUser(
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -41,4 +41,4 @@ async function ensureAuthenticateClient(
 	}
 }
 
-export { ensureAuthenticateClient };
+export { ensureAuthenticateUser };

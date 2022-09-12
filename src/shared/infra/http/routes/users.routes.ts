@@ -6,7 +6,7 @@ import { AuthenticateUserController } from "@modules/users/useCases/authenticate
 import { CreateUserController } from "@modules/users/useCases/createUser/CreateUserController";
 import { UpdateUserAvatarController } from "@modules/users/useCases/updateUserAvatar/UpdateUserAvatarController";
 
-import { ensureAuthenticateClient } from "../middlewares/ensureAuthenticateClient";
+import { ensureAuthenticateUser } from "../middlewares/ensureAuthenticateUser";
 import { GetUserProfileController } from "@modules/users/useCases/getUserProfile/GetUserProfileController";
 
 const uploadAvatar = multer(multerConfig);
@@ -20,10 +20,10 @@ const updateUserAvatarController = new UpdateUserAvatarController();
 
 usersRoutes.post("/authenticate", authenticateUserController.handle);
 usersRoutes.post("/", createUserController.handle);
-usersRoutes.get("/", ensureAuthenticateClient, getUserProfileController.handle);
+usersRoutes.get("/", ensureAuthenticateUser, getUserProfileController.handle);
 usersRoutes.patch(
 	"/avatar",
-	ensureAuthenticateClient,
+	ensureAuthenticateUser,
 	uploadAvatar.single("avatar"),
 	updateUserAvatarController.handle
 );
