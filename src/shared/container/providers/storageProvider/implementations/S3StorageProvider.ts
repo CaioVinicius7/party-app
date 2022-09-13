@@ -1,3 +1,4 @@
+import mime from "mime";
 import { S3 } from "aws-sdk";
 import fs from "fs";
 import { resolve } from "path";
@@ -20,12 +21,15 @@ class S3StorageProvider implements IStorageProvider {
 
 		const fileContent = await fs.promises.readFile(originalname);
 
+		const fileType = mime.getType(originalname) || undefined;
+
 		await this.client
 			.putObject({
 				Bucket: `${process.env.BUCKET_NAME}/${folder}`,
 				Key: file,
 				ACL: "public-read",
-				Body: fileContent
+				Body: fileContent,
+				ContentType: fileType
 			})
 			.promise();
 
@@ -33,8 +37,6 @@ class S3StorageProvider implements IStorageProvider {
 	}
 
 	async delete(file: string, folder: string): Promise<void> {
-		console.log(file);
-
 		await this.client
 			.deleteObject({
 				Bucket: `${process.env.BUCKET_NAME}/${folder}`,
