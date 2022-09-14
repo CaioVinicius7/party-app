@@ -1,13 +1,13 @@
 import { IPartiesRepository } from "@modules/parties/repositories/IPartiesRepository";
-import { IPartyConfirmationRepository } from "@modules/parties/repositories/IPartyConfirmationRepository";
+import { IPartyPresenceRepository } from "@modules/parties/repositories/IPartyPresenceRepository";
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
 class ConfirmPartyPresenceUseCase {
 	constructor(
-		@inject("PartyConfirmationRepository")
-		private partyConfirmationRepository: IPartyConfirmationRepository,
+		@inject("PartyPresenceRepository")
+		private partyPresenceRepository: IPartyPresenceRepository,
 		@inject("PartiesRepository")
 		private partiesRepository: IPartiesRepository
 	) {}
@@ -20,16 +20,13 @@ class ConfirmPartyPresenceUseCase {
 		}
 
 		const presenceAlreadyConfirmed =
-			await this.partyConfirmationRepository.findByUserAndPartyId(
-				userId,
-				partyId
-			);
+			await this.partyPresenceRepository.findByUserAndPartyId(userId, partyId);
 
 		if (presenceAlreadyConfirmed) {
 			throw new AppError("Presence already confirmed for this party!");
 		}
 
-		const partyConfirmation = await this.partyConfirmationRepository.create(
+		const partyConfirmation = await this.partyPresenceRepository.create(
 			userId,
 			partyId
 		);

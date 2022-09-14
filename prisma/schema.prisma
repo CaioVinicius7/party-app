@@ -21,7 +21,7 @@ model User {
   updated_at DateTime @default(now())
 
   Party             Party[]
-  partyConfirmation PartyConfirmation[]
+  partyConfirmation PartyPresence[]
 
   @@map("users")
 }
@@ -42,12 +42,12 @@ model Party {
   User   User   @relation(fields: [userId], references: [id])
   userId String
 
-  partyConfirmation PartyConfirmation[]
+  partyConfirmation PartyPresence[]
 
   @@map("parties")
 }
 
-model PartyConfirmation {
+model PartyPresence {
   id String @id @default(uuid())
 
   user   User   @relation(fields: [userId], references: [id])
@@ -58,5 +58,5 @@ model PartyConfirmation {
 
   created_at DateTime @default(now())
 
-  @@map("party_confirmation")
+  @@map("party_presence")
 }
