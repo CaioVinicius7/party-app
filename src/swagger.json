@@ -251,6 +251,49 @@
 					}
 				}
 			}
+		},
+		"/Party/disconfirm": {
+			"delete": {
+				"tags": ["Parties", "Users"],
+				"summary": "Retirada de confirmação de presença em festa",
+				"description": "Retirada de confirmação de presença em festa",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/DisconfirmPartyRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/DisconfirmPartyResponse200"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "A party confirmation with this id not exists!",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/DisconfirmPartyResponse400"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"definitions": {
@@ -550,6 +593,45 @@
 				"message": {
 					"type": "string",
 					"example": "Party with this id does not exist!"
+				}
+			}
+		},
+		"DisconfirmPartyRequest": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid"
+				}
+			}
+		},
+		"DisconfirmPartyResponse200": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid"
+				},
+				"userId": {
+					"type": "string",
+					"format": "uuid"
+				},
+				"partyId": {
+					"type": "string",
+					"format": "uuid"
+				},
+				"created_at": {
+					"type": "string",
+					"format": "date-time"
+				}
+			}
+		},
+		"DisconfirmPartyResponse400": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string",
+					"example": "A party confirmation with this id not exists!"
 				}
 			}
 		}
