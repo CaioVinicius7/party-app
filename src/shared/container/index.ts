@@ -6,8 +6,8 @@ import { PartiesRepository } from "@modules/parties/infra/prisma/repositories/Pa
 import { IPartiesRepository } from "@modules/parties/repositories/IPartiesRepository";
 import { UsersRepository } from "@modules/users/infra/prisma/repositories/UsersRepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
-import { IPartyConfirmationRepository } from "@modules/parties/repositories/IPartyConfirmationRepository";
-import { PartyConfirmationRepository } from "@modules/parties/infra/prisma/repositories/PartyConfirmationRepository";
+import { IPartyPresenceRepository } from "@modules/parties/repositories/IPartyPresenceRepository";
+import { PartyPresenceRepository } from "@modules/parties/infra/prisma/repositories/PartyPresenceRepository";
 
 container.registerSingleton<IUsersRepository>(
 	"UsersRepository",
@@ -18,7 +18,7 @@ container.registerSingleton<IPartiesRepository>(
 	PartiesRepository
 );
 
-container.registerSingleton<IPartyConfirmationRepository>(
-	"PartyConfirmationRepository",
-	PartyConfirmationRepository
+container.registerSingleton<IPartyPresenceRepository>(
+	"PartyPresenceRepository",
+	PartyPresenceRepository
 );
